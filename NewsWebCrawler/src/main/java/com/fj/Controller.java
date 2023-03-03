@@ -1,17 +1,28 @@
 package com.fj;
 
-import java.io.*;
-import java.util.Properties;
+import edu.uci.ics.crawler4j.crawler.CrawlConfig;
+import edu.uci.ics.crawler4j.crawler.CrawlController;
+import edu.uci.ics.crawler4j.fetcher.PageFetcher;
+import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
+import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 public class Controller {
     public static void main(String[] args) throws Exception{
-        Properties props = new Properties();
-        //FileReader file = new FileReader("src/main/resources/config.properties");
-        FileInputStream fis = new FileInputStream("src/main/resources/config.properties");
-        //InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config.properties");
-        props.load(fis);
+       CrawlConfig config = new CrawlConfig();
+       config.setCrawlStorageFolder(Config.getProperty("crawl_storage"));
+       config.setMaxDepthOfCrawling(Config.getIntProperty("max_depth"));
+       config.setMaxPagesToFetch(Config.getIntProperty("maximum_pages"));
+       config.setIncludeBinaryContentInCrawling(true);
 
-        String max = props.getProperty("maximum_pages");
-        // System.out.println(max);
+        PageFetcher pageFetcher = new PageFetcher(config);
+        RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
+        RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
+        CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
+
+        controller.addSeed(Config.getProperty("url"));
+        controller.start(MyCrawler.class, Config.getIntProperty("numberThreads"));
+
+        ///System.out.println("done !!!!!");
+
     }
 }

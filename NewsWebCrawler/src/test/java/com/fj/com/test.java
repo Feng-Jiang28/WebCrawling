@@ -7,6 +7,7 @@ import edu.uci.ics.crawler4j.crawler.CrawlController;
 import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
+import edu.uci.ics.crawler4j.url.WebURL;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -78,4 +79,13 @@ public class test {
         controller.start(MyCrawler.class, Config.getIntProperty("numberThreads"));
 
     }
+
+//    @Test
+//    public void hasHostName(){
+//        String domain = "http://nytimes.com/section/sports";
+//        String assginedDomain = Config.getProperty("news_site");
+//        //return domain.equals()
+//        System.out.println(domain.equals(assginedDomain));
+//    }
+
 }

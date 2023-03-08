@@ -6,9 +6,13 @@ import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
+import java.io.IOException;
+
 import static com.fj.MyCrawler.*;
 
 public class Controller {
+
+
     public static void main(String[] args) throws Exception{
        CrawlConfig config = new CrawlConfig();
        config.setCrawlStorageFolder(Config.getProperty("crawl_storage"));
@@ -27,21 +31,43 @@ public class Controller {
         controller.start(MyCrawler.class, Config.getIntProperty("numberThreads"));
 
 
-        for(int i = 0; i < fileList.size(); i++){
-            System.out.println(fileList.get(i));
+        try {
+            // Create a FileWriter object to write to the CSV file
+            UrlWriter.writeUrlStatusListToFile(urlStatusList, "fetch_NYTimes.csv");
+            // Clear the urlStatusList
+            urlStatusList.clear();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
-        for(int i = 0; i < discoveredItemsList.size(); i++){
-            System.out.println(discoveredItemsList.get(i));
+
+        try {
+            // Create a FileWriter object to write to the CSV file
+            UrlWriter.writeUrlStatusListToFile(urlStatusList, "fetch_NYTimes.csv");
+            // Clear the urlStatusList
+            urlStatusList.clear();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
 
-        for(int i = 0; i < urlStatusList.size(); i++){
-            System.out.println(i +  " URL: " + urlStatusList.get(i).getUrl() + " : " + urlStatusList.get(i).getStatusCode());
+        try {
+            // Create a FileWriter object to write to the CSV file
+            UrlWriter.writeFileDownloaded (fileList, "visit_NYTimes.csv");
+            // Clear the urlStatusList
+            fileList.clear();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        // System.out.println(urlStatusList);
-        // System.out.println(MyCrawler.downLoadedFiles);
-        ///System.out.println("done !!!!!");
+
+        int num_extract = set_within.size() + set_outside.size();
+        CrawlReport crawlReport = new CrawlReport();
+
+        crawlReport.unique_url = num_extract;
+        crawlReport.unique_url_within = set_within.size();
+        crawlReport.unique_url_outside = set_outside.size();
+
+        crawlReport.write("CrawlReport_NYTimes.txt");
 
     }
 }

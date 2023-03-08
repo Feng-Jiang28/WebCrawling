@@ -8,7 +8,11 @@ import java.util.Properties;
 
 public class Config {
 
-   private static Properties properties;
+    public static final int KB = 1024;
+    public static final int MB = 1024 * 1024;
+
+
+    private static Properties properties;
    static{
        try{
            properties = new Properties();

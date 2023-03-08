@@ -1,0 +1,39 @@
+Name: Feng Jiang
+USC ID: 3980819610
+News site crawled: nytimes.com
+Number of threads: 12
+Fetch Statistics
+================
+# fetches attempted: 19955
+# fetches succeeded:10061
+# fetches failed or aborted:9904
+Outgoing URLs
+==============
+Total URLs extracted:554920
+# unique URLs extracted:235569
+# unique URLs within News Site:107023
+# unique URLs outside News Site:128546
+Status Codes:
+=============
+200 OK:10061
+301 Moved Permanently:240
+302 Move Temporarily: 9641
+400 Bad Request: 10
+401 Unauthorized:0
+403 Forbidden:4
+404 Not Found:6
+500 Internal Server:0
+File Sizes:
+===========
+< 1KB:3
+1KB ~ <10KB:28
+10KB ~ <100KB:1963
+100KB ~ <1MB:7180
+>= 1MB:857
+Content Types:
+==============
+text/html:9865
+image/gif:0
+image/jpeg:10
+image/png:30
+application/pdf:4
